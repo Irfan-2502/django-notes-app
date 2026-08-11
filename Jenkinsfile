@@ -3,10 +3,18 @@ pipeline {
 
     environment {
         PROJECT_ID = 'project-5fb420c3-a64f-40e2-906'
-        REGION = 'us-central1'
         REPOSITORY = 'zango'
         IMAGE_NAME = 'notes-app'
     }
+
+    parameters {
+        choice(
+            name: 'REGION',
+            choices: ['us-central1', 'us-west1'],
+            description: 'Select the Artifact Registry region'
+        )
+    }
+
 
     stages {
 
@@ -39,10 +47,10 @@ pipeline {
                     gcloud auth configure-docker $REGION-docker.pkg.dev
 
                     docker tag $IMAGE_NAME \
-                    $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$BUILD_NUMBER
+                    ${params.REGION}-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$BUILD_NUMBER
 
                     docker push \
-                    $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$BUILD_NUMBER
+                    ${params.REGION}-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$BUILD_NUMBER
                 '''
             }
         }
