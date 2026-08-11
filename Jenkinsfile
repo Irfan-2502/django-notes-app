@@ -47,10 +47,10 @@ pipeline {
                     gcloud auth configure-docker $REGION-docker.pkg.dev
 
                     docker tag $IMAGE_NAME \
-                    ${params.REGION}-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$BUILD_NUMBER
+                    $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$BUILD_NUMBER
 
                     docker push \
-                    ${params.REGION}-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$BUILD_NUMBER
+                    $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$BUILD_NUMBER
                 '''
             }
         }
