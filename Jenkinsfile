@@ -5,14 +5,7 @@ pipeline {
         PROJECT_ID = 'project-5fb420c3-a64f-40e2-906'
         REPOSITORY = 'zango'
         IMAGE_NAME = 'notes-app'
-    }
-
-    parameters {
-        choice(
-            name: 'REGION',
-            choices: ['us-central1', 'us-west1'],
-            description: 'Select the Artifact Registry region'
-        )
+        REGION = 'us-central1'
     }
 
 
